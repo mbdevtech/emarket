@@ -59,12 +59,15 @@ class StoreController extends AbstractController
         $product_photo = $this->getDoctrine()->getRepository(Product::class)->findOneProductPhoto($index);
         // id=category_id  index=product_id
         $alternate_products = $this->getDoctrine()->getRepository(Product::class)->findOtherProductPhoto($id, $index);
+        // we provide the product reviews in product detail
+        $product_reviews = $this->getDoctrine()->getRepository(Review::class)->findReviews($index);
         // avg rate
         $avg_rate = $this->getDoctrine()->getRepository(Review::class)->findAverageRate($index);
         return $this->render('shopping/product/product.html.twig', [
             'category' => $id,
             'product' => $product_photo,
             'similar' => $alternate_products,
+            'reviews' => $product_reviews,
             'avg_rate' => $avg_rate
         ]);
     }
