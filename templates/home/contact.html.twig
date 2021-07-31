@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!
+{% endblock %}
+
+{% block body %}
+	<div id="contact-page" class="container">
+		<div class="bg">
+			<h2 class="title text-center">Contact
+				<strong>Us</strong>
+			</h2>
+
+			<div class="row">
+				<div class="col-sm-10">
+					<div id="gmap" class="contact-map">
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2794.1023272558914!2d-73.6651648848895!3d45.54826703585167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc9189583376a3f%3A0x5df144d53057fb87!2s10205%20St%20Laurent%20Blvd%2C%20Montreal%2C%20QC%20H3L%202N5%2C%20Canada!5e0!3m2!1sen!2sdz!4v1620206411370!5m2!1sen!2sdz" width="600" height="400" style="border:0; margin-bottom:40px;" allowfullscreen="" loading="lazy"></iframe>
+
+					</div>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="signup-form col-sm-7">
+					{{form_start(Contact)}}
+					{{ form_row(Contact.full_name, {'label':'Full name         :','attr':{'placeholder':'Enter your full name...'}}) }}
+					{{ form_row(Contact.email, {'label':'Email          :','attr':{'placeholder':'Enter your email address...'}}) }}
+					{{ form_row(Contact.subject,  {'label':'Subject          :','attr':{'placeholder':'Type the subject..'}}) }}
+					{{ form_row(Contact.message,  {'label':'Message           :','attr':{'placeholder':'Your message..'}}) }}
+					<hr>
+					<button type="submit" class="btn btn-default center">Submit</button>
+
+					{{form_end(Contact)}}
+
+				</div>
+				<div class="col-sm-4">
+					<div class="contact-info">
+						<h2 class="title text-center">Contact Info</h2>
+						<address>
+							<p>E-Shopper Inc.</p>
+							<p>10205 St-laurent blvd, Montreal</p>
+							<p>QC, Caanada</p>
+							<p>Mobile: +1 438 17 38 93</p>
+							<p>Fax: 1-714-252-0026</p>
+							<p>Email: infos@bmaconsulting.net</p>
+						</address>
+						<div class="social-networks">
+							<h2 class="title text-center">Social Networking</h2>
+							<ul>
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								<li><a href="#"><i class="fa fa-youtube"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br><br>
+		</div>
+		<!--/#contact-page-->
+	{% endblock %}

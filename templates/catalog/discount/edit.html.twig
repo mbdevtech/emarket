@@ -1,0 +1,24 @@
+{% extends '/admin/admin.html.twig' %}
+{% block title %}Edit Discount{% endblock %}
+{% block content %}
+<body>
+    <div class = "container">
+        <br><br><br>
+        <div class="card card-plain">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title mt-0"> Discount Update</h4>
+                <p class="card-category"> Hit update button after doing the appropriate updates</p>
+            </div>
+        </div>
+    {{ include('catalog/discount/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+</body>
+ {% endblock %}
+
+
+
+
+
+        
+
+

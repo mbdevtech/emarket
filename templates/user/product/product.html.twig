@@ -1,0 +1,253 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	User Product
+{% endblock %}
+{% block body  %}
+	<body onload="initBoxes()">
+		<div class="container">
+
+			<h2>
+				Add new product
+			</h2>
+			<hr>
+			<h4>Categories</h4>
+			<input type="text" id="myCat" name="category" onkeyup="searchCategory()" placeholder="Search for categories..">
+			<ul class="myUL" id="catUL">
+				{% for category in categories %}
+					<li onclick="saveCategory()">
+						<a href="#">
+							{{ category.name }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="row">
+			<div class="Container">
+				<div
+					class="signup-form">
+					<!--sign up form-->
+					{{ form_start(form) }}
+					<div class="col-sm-3 col-sm-offset-1">
+						{{ form_row(form.category, {'label':'Category  '}) }}
+						{{ form_row(form.name, {'label':'Product Name  ','attr':{'placeholder':'Enter your product name...'}}) }}
+						{{ form_row(form.excerpt,  {'label':'Excerpt  ','attr':{'placeholder':'Give a small description..'}}) }}
+						{{ form_row(form.description,  {'label':'Description   ','attr':{'placeholder':'Full description...'}}) }}
+						<br>
+					</div>
+					<div class="col-sm-1 col-sm-offset-1">
+						{{ form_row(form.quantity,  {'label':'Quantity   ','attr':{'placeholder':'Enter a quantity..'}}) }}
+						{{ form_row(form.brand, {'label':'Brand','attr':{'placeholder':'Product brand'}})}}
+						{{ form_row(form.price, {'label':'Price','attr':{'placeholder':'Product price'}})}}
+						{#	{{ form_row(form.discount, {'label':'Discount','attr':{'placeholder':'Give a discount..'}})}}	#}
+					</div>
+					<div class="col-sm-5 col-sm-offset-1">
+						<br>
+						<div class="summary-panel">
+							<div class="panel-heading" style="width:80%">
+								<h3 class="panel-title">
+									<a aria-expanded="true" aria-controls="history" data-toggle="collapse" data-parent="#summary" href="#attributes" class="collapsed">
+										Specifications
+									</a>
+								</h3>
+							</div>
+							<div id="attributes" class="panel-collapse collapse">
+								<div class="panel-body">
+									<table style="width:80%">
+										<tr>
+											<th>Name</th>
+											<th>Included</th>
+											<th>value</th>
+										</tr>
+										<tr>
+											<td>Type</td>
+											<td><input type="Checkbox" id="Type_box" onclick="hideShow('Type_box','Type')" style="width:15px;height:15px;"/></td>
+											<td><input type="text" name="Type" id="Type" placeholder="Enter a value"/></td>
+										</tr>
+										<tr>
+											<td>Mesures</td>
+											<td><input type="Checkbox" id="Mesures_box" onclick="hideShow('Mesures_box','Mesures')" style="width:15px;height:15px;"/></td>
+											<td><input type="text" name="Mesures" id="Mesures" placeholder="Enter a value"/></td>
+										</tr>
+										<tr>
+											<td>Poids</td>
+											<td><input type="Checkbox" id="Poids_box" onclick="hideShow('Poids_box','Poids')" style="width:15px;height:15px;"/></td>
+											<td><input type="text" name="Poids" id="Poids" placeholder="Enter a value"/></td>
+										</tr>
+										<tr>
+											<td>Couleur</td>
+											<td><input type="Checkbox" id="Couleur_box" onclick="hideShow('Couleur_box','Couleur')" style="width:15px;height:15px;"/></td>
+											<td><input type="color" class="color-input" name="Couleur" style="padding-left:0px;" id="Couleur"/></td>
+										</tr>
+										<tr>
+											<td>Forme</td>
+											<td><input type="Checkbox" id="Forme_box" onclick="hideShow('Forme_box','Forme')" style="width:15px;height:15px;"/></td>
+											<td><input type="text" name="Forme" id="Forme" placeholder="Enter a value"/></td>
+										</tr>
+										<tr>
+											<td>Expires</td>
+											<td><input type="Checkbox" id="Expires_box" onclick="hideShow('Expires_box','Expires')" style="width:15px;height:15px;"/></td>
+											<td><input type="date" name="Expires" id="Expires" placeholder="Enter a value"/></td>
+										</tr>
+									</table>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="summary-panel">
+							<div class="panel-heading" style="width:80%">
+								<h3 class="panel-title">
+									<a
+										aria-expanded="true" aria-controls="history" data-toggle="collapse" data-parent="#summary" href="#pictures" class="collapsed">
+										{#<span  class="badge pull-right"><i class="fa fa-plus"></i></span>#}
+										Pictures
+									</a>
+								</h3>
+							</div>
+							<div id="pictures" class="panel-collapse collapse">
+
+								<div class="panel-body" id="picture-panel">
+									<input type="file" id="filetag" name="picture" accept="image/png, image/jpeg, image/jpg" style="display:none;"/>
+									<img src="" id="preview">
+								</div>
+								<a href="#" onclick="openFileOption();">Add picture</a>
+								<input type="file" id="picload" name="picload" onchange="upload()" accept="image/png, image/jpeg, image/jpg"/>
+							</div>
+						</div>
+						<hr>
+						<button type="submit" class="btn btn-default" onclick="">Save</button>
+
+					</div>
+					{{ form_end(form) }}
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		function changeImage(input) {
+var reader;
+
+if (input.files && input.files[0]) {
+reader = new FileReader();
+
+reader.onload = function (e) {
+image.setAttribute('src', e.target.result);
+}
+
+reader.readAsDataURL(input.files[0]);
+}
+}
+function openFileOption() { // document.getElementById("picture").click();
+image = document.createElement("img");
+// window.alert("hello");
+// image.src= extractFilename(filename));
+// image.setAttribute('src', filename);
+image.style.display = "block";
+image.style = "width:100px;height:100px;";
+document.getElementById("picture-panel").appendChild(image);
+var fileTag = document.getElementById("filetag");
+// preview = document.getElementById("image")  ;
+fileTag.addEventListener("change", function () {
+changeImage(this);
+});
+fileTag.click();
+}
+function upload() { // document.getElementById("picture").click();
+var image = document.createElement("img"),
+pic = document.getElementById("picload");
+// window.alert("hello");
+// image.src= extractFilename(filename));
+image.setAttribute('src', pic.value);
+image.style.display = "block";
+image.style = "width:100px;height:100px;";
+document.getElementById("picture-panel").appendChild(image);
+}
+	</script>
+	<script>
+		function searchCategory() { // Declare variables
+var input,
+filter,
+ul,
+li,
+a,
+i,
+txtValue,
+cat_ul,
+cat_il,
+categories,
+ul2;
+
+cat_ul = document.getElementById("catUL");
+cat_ul.style.display = "block";
+cat_li = cat_ul.getElementsByTagName('li');
+//
+input = document.getElementById('myCat');
+filter = input.value.toUpperCase();
+// Loop through all list items, and hide those who don't match the search query
+for (i = 0; i < cat_li.length; i++) {
+a = cat_li[i].getElementsByTagName("a")[0];
+txtValue = a.textContent || a.innerText;
+if (txtValue.toUpperCase().indexOf(filter) > -1) {
+cat_li[i].style.display = "";
+
+} else {
+cat_li[i].style.display = "none";
+}
+} // end loop
+}
+	</script>
+	<script>
+		function saveCategory() { // Declare variables
+var input,
+cat_ul,
+cat_li,
+category,
+options;
+// init vars
+cat_ul = document.getElementById("catUL");
+// cat_li = cat_ul.getElementsByTagName('li');
+input = document.getElementById('myCat');
+// get the selected value
+input.value = document.activeElement.textContent;
+// save to the list
+category = document.getElementById("product_category");
+options = category.getElementsByTagName('option');
+cat_ul.style.display = "none";
+}
+	</script>
+	<script>
+		function hideShow(boxid, textid) {
+var x = document.getElementById(textid),
+box = document.getElementById(boxid);
+
+if (box.checked) {
+x.style.display = "block";
+} else {
+x.style.display = "none";
+}
+}
+	</script>
+	<script>
+		function initBoxes() {
+document.getElementById("Type_box").checked = false;
+document.getElementById("Mesures_box").checked = false;
+document.getElementById("Poids_box").checked = false;
+document.getElementById("Couleur_box").checked = false;
+document.getElementById("Forme_box").checked = false;
+document.getElementById("Expires_box").checked = false;
+document.getElementById("Type").value = "";
+document.getElementById("Type").style.display = "none";
+document.getElementById("Mesures").value = "";
+document.getElementById("Mesures").style.display = "none";
+document.getElementById("Poids").value = "";
+document.getElementById("Poids").style.display = "none";
+document.getElementById("Couleur").value = "";
+document.getElementById("Couleur").style.display = "none";
+document.getElementById("Forme").value = "";
+document.getElementById("Forme").style.display = "none";
+document.getElementById("Expires").value = "";
+document.getElementById("Expires").style.display = "none";
+}
+	</script>
+{% endblock %}

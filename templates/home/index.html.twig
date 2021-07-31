@@ -1,0 +1,394 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}E-Market Shop
+{% endblock %}
+{% block body %}
+	<body onload="document.getElementById('all-categories').style.display = 'none';">
+		<section
+			id="slider">
+			<!--slider-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">
+									<div class="col-sm-6">
+										<h1>
+											<span>E</span>-MARKET</h1>
+										<h3>Best Value Prices</h3>
+										<p>Laptops and Notebooks from worldest top brands with very competitive prices
+										</p>
+										<button type="button" class="btn btn-default get">Buy now</button>
+									</div>
+									<div class="col-sm-6">
+										<h3 class="b-price">
+											Starting from $299.99
+										</h3>
+										<img
+										src="Images-2/Laptops/LAP5.jpg" class="girl img-responsive" alt=""/>
+									{#<img src="images/home/pricing.png"  class="pricing" alt="" /> #}
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-sm-6">
+										<h1>
+											<span>E</span>-MARKET</h1>
+										<h3>100% Reliable Parts and Accessories</h3>
+										<p>We offer you hight quality parts and computer accessories with 6 month waranty.
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										                                     Go heah with peace in mind.
+										</p>
+										<button type="button" class="btn btn-default get">Buy now</button>
+									</div>
+									<div class="col-sm-6">
+										<h3 class="b-price">
+											Starting from $99.99
+										</h3>
+										<img src="Images-2/CartesMere/cmere4.jpg" class="girl img-responsive" alt=""/>
+
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-sm-6">
+										<h1>
+											<span>E</span>-MARKET</h1>
+										<h3>Network and Security Matter</h3>
+										<p>Choosing the best hardware without the best backbone network and Security is money wasting.
+										</p>
+										<button type="button" class="btn btn-default get">Buy now</button>
+									</div>
+									<div class="col-sm-6">
+										<h3 class="b-price">
+											Starting from $149.99
+										</h3>
+										<img src="Images-2/Network/parfeu4.jpg" class="girl img-responsive" alt=""/>
+									</div>
+								</div>
+							</div>
+							<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							</a>
+							<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</section>
+		<!--/slider-->
+		<!-- categories -->
+		<section id="top-categories">
+			<div class="container">
+				<br>
+				<h2 class="title text-left">Top Categories
+				</h2>
+				<br>
+				<div class="row">
+					{% for section in sections %}
+						<div class="col-sm-2">
+							<a href="{{path('category_products',{'id':section.id})}}">
+								<h4 class="text-center">{{ section.name }}</h4>
+								<br>
+								{%  set image = "Images-2/Categories/" ~ section.image %}
+								<img src="{{asset(image)}}" alt={{ section.name }}>
+							</img>
+						</a>
+					</div>
+				{% endfor %}
+				<br>
+				<a id="mylink" onclick="document.getElementById('all-categories').style.display = 'block';																																																																																																																																																																document.getElementById('top-categories').style.display = 'none';">
+					<h4 class="text-right">See All Categories</h4>
+				</a>
+			</div>
+		</div>
+	</body>
+</section>
+<section id="all-categories">
+	<div class="container">
+		<br>
+		<h2 class="title text-left">All Categories</h2>
+		<br>
+		<div class="row">
+			{% for section in allsections %}
+				<div class="col-sm-2">
+					<a href="{{path('category_products',{'id':section.id})}}">
+						<h4 class="text-center">{{ section.name }}</h4>
+						<br>
+						{%  set image = "Images-2/Categories/" ~ section.image %}
+						<img src="{{asset(image)}}" alt={{ section.name }}>
+					</img>
+				</a>
+			</div>
+		{% endfor %}
+		<br>
+		<a id="mylink" onclick="document.getElementById('all-categories').style.display = 'none';																																																																																										document.getElementById('top-categories').style.display = 'block';">
+			<h4 class="text-right">See Top Categories</h4>
+		</a>
+	</div>
+</div></section><!--/categories--><section id="hot-deals">
+{% if discounts|length >0  %}
+	{# At least 1 item #}
+	<div class="container">
+		<h2 class="title text-left">Hot Deals</h2>
+		<div class="row">
+			<div id="deals-carousel" class="carousel slide">
+				<div class="carousel-inner">
+					{% if discounts|length <= 6  %}
+						{# till 4 items #}
+						{% for discount in discounts[0:] %}
+							<div class="item active">
+								<div class="col-sm-2">
+									<a href="{{path('product_detail',{'index':discount.id, 'id': category})}}">
+										<img src="{{discount.path}}" class="girl img-responsive" alt=""/>
+										<del class="deal-price">${{discount.price}}</del>
+										{% set newprice = discount.price * (1-discount.rate) %}
+										<h3>${{newprice}}</h3>
+										<br><br>
+									</a>
+									<a href="#" class="btn btn-default add-to-cart">
+										<i class="fa fa-shopping-cart"></i>Add to cart</a>
+
+								</div>
+							</div>
+						{% endfor %}
+					{% else %}
+						{# more than 4 items we need to display only 4 each item #}
+						<div class="item active">
+							{% for i in [0,1,2,3,4,5] %}
+								<div class="col-sm-2">
+									<a href="{{path('product_detail',{'index':discounts[i].id, 'id': category})}}">
+										<img src="{{discounts[i].path}}" class="girl img-responsive" alt=""/>
+										<del class="deal-price">${{discounts[i].price}}</del>
+										{% set newprice = discounts[i].price * (1-discounts[i].rate) %}
+										<h3>${{newprice}}</h3>
+										<br><br>
+									</a>
+									<a href="#" class="btn btn-default add-to-cart">
+										<i class="fa fa-shopping-cart"></i>Add to cart</a>
+								</div>
+							{% endfor %}
+						</div>
+						<div class="item">
+							{% for discount in discounts[6:] %}
+								<div class="col-sm-3">
+									<a href="{{path('product_detail',{'index':discount.id, 'id': category})}}">
+										<img src="{{discount.path}}" class="girl img-responsive" alt=""/>
+										<del class="deal-price">${{discount.price}}</del>
+										{% set newprice = discount.price * (1-discount.rate) %}
+										<h3>${{newprice}}</h3>
+										<br><br>
+									</a>
+									<a href="#" class="btn btn-default add-to-cart">
+										<i class="fa fa-shopping-cart"></i>Add to cart</a>
+								</div>
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
+				<a href="#deals-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+					<i class="fa fa-angle-left"></i>
+				</a>
+				<a href="#deals-carousel" class="right control-carousel hidden-xs" data-slide="next">
+					<i class="fa fa-angle-right"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+{% endif %}</section><!--/deals--><section id="popular-brands">
+<div class="container">
+	<br>
+	<h2 class="title text-left">Popular Brands</h2>
+	<br>
+	{% set brands=["acer","asus","dell","epson","hp","samsung"] %}
+	<div class="row">
+		{% for brand in brands %}
+			<div class="col-sm-2">
+				<a href="#">
+					{%  set image = "Images-2/brands/" ~ brand ~ ".png"%}
+					<img src="{{asset(image)}}" alt={{ brand }}>
+				</img>
+			</a>
+		</div>
+	{% endfor %}
+	<br>
+</div></div></section><!--/brands--><section id="new-arrivals">{% if discounts|length >0  %}
+{# At least 1 item #}
+<div class="container">
+	<h2 class="title text-left">New Arrivals</h2>
+	<div class="row">
+		<div id="deals-carousel" class="carousel slide">
+			<div class="carousel-inner">
+				{% if discounts|length <= 4  %}
+					{# till 4 items #}
+					{% for discount in discounts[0:] %}
+						<div class="item active">
+							<div class="col-sm-2">
+								{{loop.index}}
+								<img src="{{discount.path}}" class="girl img-responsive" alt=""/>
+								<h6 class="deal-price">${{discount.price}}</h6>
+								<del class="deal-price">${{discount.price}}</del>
+								<br><br>
+								<a href="#" class="btn btn-default add-to-cart">
+									<i class="fa fa-shopping-cart"></i>Add to cart</a>
+							</div>
+						</div>
+					{% endfor %}
+				{% else %}
+					{# more than 4 items we need to display only 4 each item #}
+					<div class="item active">
+						{% for i in [0,1,2,3,4,5] %}
+							<div class="col-sm-2">
+								<img src="{{discounts[i].path}}" class="girl img-responsive" alt=""/>
+								<h6 class="deal-price">${{discounts[i].price}}</h6>
+								<del class="deal-price">${{discounts[i].price}}</del>
+								<br><br>
+								<a href="#" class="btn btn-default add-to-cart">
+									<i class="fa fa-shopping-cart"></i>Add to cart</a>
+							</div>
+						{% endfor %}
+					</div>
+					<div class="item">
+						{% for discount in discounts[6:] %}
+							<div class="col-sm-3">
+								<img src="{{discount.path}}" class="girl img-responsive" alt=""/>
+								<h6 class="deal-price">${{discount.price}}</h6>
+								<del class="deal-price">${{discount.price}}</del>
+								<br><br>
+								<a href="#" class="btn btn-default add-to-cart">
+									<i class="fa fa-shopping-cart"></i>Add to cart</a>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+			<a href="#deals-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+				<i class="fa fa-angle-left"></i>
+			</a>
+			<a href="#deals-carousel" class="right control-carousel hidden-xs" data-slide="next">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</div>
+	</div>
+</div>{% endif %}</section><!--/new-arrivals--><section id="recommended">{% if discounts|length >0  %}
+{# At least 1 item #}
+<div class="container">
+	<h2 class="title text-left">recommended Items</h2>
+	<div class="row">
+		<div id="deals-carousel" class="carousel slide">
+			<div class="carousel-inner">
+				{% if discounts|length <= 4  %}
+					{# till 4 items #}
+					{% for discount in discounts[0:] %}
+						<div class="item active">
+							<div class="col-sm-2">
+								{{loop.index}}
+								<img src="{{discount.path}}" class="girl img-responsive" alt=""/>
+								<h6 class="deal-price">${{discount.price}}</h6>
+								<del class="deal-price">${{discount.price}}</del>
+								<br><br>
+								<a href="#" class="btn btn-default add-to-cart">
+									<i class="fa fa-shopping-cart"></i>Add to cart</a>
+							</div>
+						</div>
+					{% endfor %}
+				{% else %}
+					{# more than 4 items we need to display only 4 each item #}
+					<div class="item active">
+						{% for i in [0,1,2,3,4,5] %}
+							<div class="col-sm-2">
+								<img src="{{discounts[i].path}}" class="girl img-responsive" alt=""/>
+								<h6 class="deal-price">${{discounts[i].price}}</h6>
+								<del class="deal-price">${{discounts[i].price}}</del>
+								<br><br>
+								<a href="#" class="btn btn-default add-to-cart">
+									<i class="fa fa-shopping-cart"></i>Add to cart</a>
+							</div>
+						{% endfor %}
+					</div>
+					<div class="item">
+						{% for discount in discounts[6:] %}
+							<div class="col-sm-3">
+								<img src="{{discount.path}}" class="girl img-responsive" alt=""/>
+								<h6 class="deal-price">${{discount.price}}</h6>
+								<del class="deal-price">${{discount.price}}</del>
+								<br><br>
+								<a href="#" class="btn btn-default add-to-cart">
+									<i class="fa fa-shopping-cart"></i>Add to cart</a>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+			<a href="#deals-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+				<i class="fa fa-angle-left"></i>
+			</a>
+			<a href="#deals-carousel" class="right control-carousel hidden-xs" data-slide="next">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</div>
+	</div>
+</div>{% endif %}</section><!--/recommended--><section id="best-selling">{% if discounts|length >0  %}
+{# At least 1 item #}
+<div class="container">
+	<h2 class="title text-left">Best Selling</h2>
+	<div class="row">
+		<div id="deals-carousel" class="carousel slide">
+			<div class="carousel-inner">
+				{% if discounts|length <= 4  %}
+					{# till 4 items #}
+					{% for discount in discounts[0:] %}
+						<div class="item active">
+							<div class="col-sm-2">
+								{{loop.index}}
+								<img src="{{discount.path}}" class="girl img-responsive" alt=""/>
+								<h6 class="deal-price">${{discount.price}}</h6>
+								<del class="deal-price">${{discount.price}}</del>
+								<br><br>
+								<a href="#" class="btn btn-default add-to-cart">
+									<i class="fa fa-shopping-cart"></i>Add to cart</a>
+							</div>
+						</div>
+					{% endfor %}
+				{% else %}
+					{# more than 4 items we need to display only 4 each item #}
+					<div class="item active">
+						{% for i in [0,1,2,3,4,5] %}
+							<div class="col-sm-2">
+								<img src="{{discounts[i].path}}" class="girl img-responsive" alt=""/>
+								<h6 class="deal-price">${{discounts[i].price}}</h6>
+								<del class="deal-price">${{discounts[i].price}}</del>
+								<br><br>
+								<a href="#" class="btn btn-default add-to-cart">
+									<i class="fa fa-shopping-cart"></i>Add to cart</a>
+							</div>
+						{% endfor %}
+					</div>
+					<div class="item">
+						{% for discount in discounts[6:] %}
+							<div class="col-sm-3">
+								<img src="{{discount.path}}" class="girl img-responsive" alt=""/>
+								<h6 class="deal-price">${{discount.price}}</h6>
+								<del class="deal-price">${{discount.price}}</del>
+								<br><br>
+								<a href="#" class="btn btn-default add-to-cart">
+									<i class="fa fa-shopping-cart"></i>Add to cart</a>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+			<a href="#deals-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+				<i class="fa fa-angle-left"></i>
+			</a>
+			<a href="#deals-carousel" class="right control-carousel hidden-xs" data-slide="next">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</div>
+	</div>
+</div>{% endif %}</section><!--/best selling--></body>{% endblock %}{% block Javascript %}<script type="text/javascript">function hideall() {
+document.getElementById("all-categories").style.display = "none";
+}</script><script type="text/javascript">function showtop() {
+alert("show only top categories");
+}</script>{% endblock %}

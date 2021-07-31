@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Discount{% endblock %}
+
+{% block body %}
+    <h1>Discount</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ discount.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ discount.type }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ discount.name }}</td>
+            </tr>
+            <tr>
+                <th>Rate</th>
+                <td>{{ discount.rate }}</td>
+            </tr>
+            <tr>
+                <th>StartDate</th>
+                <td>{{ discount.startDate ? discount.startDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ExpiryDate</th>
+                <td>{{ discount.expiryDate ? discount.expiryDate|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('catalog_discount_index') }}">back to list</a>
+
+    <a href="{{ path('catalog_discount_edit', {'id': discount.id}) }}">edit</a>
+
+    {{ include('catalog/discount/_delete_form.html.twig') }}
+{% endblock %}

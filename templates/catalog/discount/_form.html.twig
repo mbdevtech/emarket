@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+    <div class="md-form">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">	
+                {{ form_row(form.product, {'label':'Product         :'}) }}
+                {{ form_row(form.name, {'label':'Discount Name          :','attr':{'placeholder':'Enter your discount name...'}}) }}
+                {{ form_row(form.type,  {'label':'Type           :','attr':{'placeholder':'Give a discount type..'}}) }}
+                {{ form_row(form.rate,  {'label':'Rate           :','attr':{'placeholder':'Give a discount rate..'}}) }}
+            </div>
+            <div class="col-sm-6 col-sm-offset-3">	 
+                {{ form_row(form.startDate,  {'label':'Start from         :'}) }}
+                {{ form_row(form.expiryDate,  {'label':'Expiry on             :'}) }}
+                <hr>
+                <button class="btn">{{ button_label|default('Save') }}</button>
+                <hr>
+                <a href="{{ path('catalog_discount_index') }}">Back to discount list </a>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}
+

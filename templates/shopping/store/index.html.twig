@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}E-Market Shop
+{% endblock %}
+{% block body %}
+	<body>
+		<div class=" container">
+			<div class="row">
+				{% include "home/leftsidebar.html.twig" %}
+				<div class="col-sm-9 padding-right">
+					<h2 class="title text-center">Featured Products ({{ pagination.getTotalItemCount }})</h2>
+					{% for p in pagination %}
+						<div class="col-sm-3">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<a href="{{path('product_detail',{'index':p.id, 'id': category})}}">
+											<img src='{{ p.path }}' alt=""/>
+										</a>
+										<h2>${{ p.price }}</h2>
+										<h5>{{ p.excerpt }}</h5>
+										<a href="#" class="btn btn-default add-to-cart">
+											<i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+								</div>
+								<div class="choose">
+									<ul class="nav nav-pills nav-justified">
+										<li>
+											<a href="#">
+												<i class="fa fa-plus-square"></i>Add to wishlist</a>
+										</li>
+										<li>
+											<a href="#">
+												<i class="fa fa-plus-square"></i>Add to compare</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</diV>
+
+					{% endfor %}
+					{{ knp_pagination_render(pagination) }}
+				</div>
+			</div>
+			{% if discounts|length >0  %}
+				{# At least 1 item #}
+				<div class="container">
+					<h2 class="title text-center">recommended Items</h2>
+					<div class="row">
+						<div id="deals-carousel" class="carousel slide">
+							<div class="carousel-inner">
+								{% if discounts|length <= 6  %}
+									{# till 6 items #}
+									{% for discount in discounts[0:] %}
+										<div class="item active">
+											<div class="col-sm-2">
+												<a href="{{path('product_detail',{'index':discount.id, 'id': category})}}">
+													<img src="{{discount.path}}" class="girl img-responsive" alt=""/>
+													<h6 class="deal-price">${{discount.price}}</h6>
+													<del class="deal-price">${{discount.price}}</del>
+													<br><br>
+													<a href="#" class="btn btn-default add-to-cart">
+														<i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+											</div>
+										{% endfor %}
+									{% else %}
+										{# more than 6 items we need to display only 6 each item #}
+										<div class="item active">
+											{% for i in [0,1,2,3,4,5] %}
+												<div class="col-sm-2">
+													<a href="{{path('product_detail',{'index':discounts[i].id, 'id': category})}}">
+														<img src="{{discounts[i].path}}" class="girl img-responsive" alt=""/>
+														<h6 class="deal-price">${{discounts[i].price}}</h6>
+														<del class="deal-price">${{discounts[i].price}}</del>
+														<br><br>
+														<a href="#" class="btn btn-default add-to-cart">
+															<i class="fa fa-shopping-cart"></i>Add to cart</a>
+													</div>
+												{% endfor %}
+											</div>
+											<div class="item">
+												{% for discount in discounts[6:] %}
+													<div class="col-sm-2">
+														<a href="{{path('product_detail',{'index':discount.id, 'id': category})}}">
+															<img src="{{discount.path}}" class="girl img-responsive" alt=""/>
+															<h6 class="deal-price">${{discount.price}}</h6>
+															<del class="deal-price">${{discount.price}}</del>
+															<br><br>
+															<a href="#" class="btn btn-default add-to-cart">
+																<i class="fa fa-shopping-cart"></i>Add to cart</a>
+														</div>
+													{% endfor %}
+												</div>
+											{% endif %}
+										</div>
+										<a href="#deals-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+											<i class="fa fa-angle-left"></i>
+										</a>
+										<a href="#deals-carousel" class="right control-carousel hidden-xs" data-slide="next">
+											<i class="fa fa-angle-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>
+						{% endif %}
+					</div>
+				</body>
+			</body>
+		</div>
+	</body>
+</body></div></body></section></body>{% endblock %}

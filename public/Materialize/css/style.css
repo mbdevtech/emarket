@@ -1,0 +1,59 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 10px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+.banner{
+  background-color: #eee;
+  height: 400px;
+}
+.container-banner{
+  padding-top: 100px;
+}
+.container-bg.color-lightgray{
+  background-color: #eee;
+}
+.container-bg.color-dark{
+  background-color: #8e24aa;
+}
+.container-pricing {
+  background-color: lightgreen;
+}
+.container-services {
+  background-color: lightseagreen;
+}
+.pricing-header {
+   background-color : #546e7a ;
+   color:white;
+   font-size: 20px;
+}
+.pricing-data {
+  background-color : whitesmoke;
+  color:black;
+  font-size: 14px;
+}
+.pricing-footer {
+  background-color : #546e7a ;
+  color : whitesmoke;
+  font-size: 16px;
+}
+.price-text {
+  font-size: 32px;
+}
+.card .card-content ul{
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1,8 rem;
+}
+.page-footer .footer-copyright {
+  background-color: rgba(51, 51, 51, 0.2);
+}

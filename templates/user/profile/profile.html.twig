@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+{% block title %}E-market Profile{% endblock %}
+{% block body %}
+   <div class = "row account-row" >
+ 			<div class="col-sm-3">
+				   <h2>Profile details </h2>
+				   <hr>
+		           {%  include 'user/navside.html.twig' %}
+		        </div><!--/col-sm-3-->					 
+				<div class="signup-form"><!--sign up form-->	
+		    	  {{ form_start(form) }}			
+				<div class="col-sm-3 col-sm-offset-1">			   
+                           	{{ form_row(form.fullName, {'label':'Full Name','attr':{'placeholder':'Enter your name...'}}) }}
+							{{ form_row(form.displayName, {'label':'Display Name  ','attr':{'placeholder':'Enter your display name...'}}) }}
+							{{ form_row(form.phoneNumber,  {'label':'Phone Number  ','attr':{'placeholder':'Give us your phone number..'}}) }}
+                            {{ form_row(form.email,  {'label':'Email   ','attr':{'placeholder':'Enter your emai...'}}) }}
+ 					        {{ form_row(form.description,  {'label':'Description   ','attr':{'placeholder':'Give us a desciption..'}}) }}
+                            {{ form_row(form.picture, {'attr':{'style':'padding-left: 0px;'}})}}   
+                         	{{ form_row(form.cover, {'attr':{'style':'padding-left: 0px;'}})}}				    					    
+				</div>	
+				<div class="col-sm-3 col-sm-offset-1">		    		
+                          {{ form_row(form.billingAddress,  {'label':'Billing Address   ','attr':{'placeholder':'Enter the billing address..'}}) }}                                                            
+					      <input type="checkbox"  id="same_adr" style="width:18px;" onchange="hideshow()"/>
+						  <label> Shipping address is same as Billing </label> 
+						  <div class="signup-form "  id="shipping_adr"><!--sign up form-->			                           
+					        {{ form_row(form.shippingAddress,  {'label':'Shipping Address   ','attr':{'placeholder':'Shipping address if different..'}}) }}   
+                         </div>				 
+						 <br>
+			            <button type="submit" class="btn btn-default" onclick = "Save()">Save</button>
+						<hr>
+				</div>
+			    {{ form_end(form) }}
+			</div>          
+		  <hr>
+    </div>	
+
+<script type="text/javascript">
+function hideshow(){
+	var x = document.getElementById("shipping_adr"),
+	   box = document.getElementById("same_adr");
+	
+	if (box.checked)
+	  {    // call save to modify shipping address
+		   Save();
+		   x.style.display = "none"; //"none";
+	  }
+	  else x.style.display = "block";
+}
+function Save(){
+  //var  box = document.getElementById("same_adr");
+
+  var address = document.getElementById("profile_billingAddress_address");
+  var city = document.getElementById("profile_billingAddress_city");
+  var state = document.getElementById("profile_billingAddress_state");
+  var country = document.getElementById("profile_billingAddress_country");
+  var postalCode = document.getElementById("profile_billingAddress_postalCode");
+
+// same values for shipping
+ var a = document.getElementById("profile_shippingAddress_address");
+ var c = document.getElementById("profile_shippingAddress_city");
+ var s = document.getElementById("profile_shippingAddress_state");
+ var t = document.getElementById("profile_shippingAddress_country");
+ var p = document.getElementById("profile_shippingAddress_postalCode");
+//if (box.checked)
+//  { 
+    a.value = address.value;
+    c.value = city.value;
+    s.value = state.value;
+    t.value = country.value;
+    p.value = postalCode.value;
+  //}
+
+}
+</script>
+<script type="text/javascript">
+
+</script>
+
+{#{% endif %}#}
+{% endblock %}

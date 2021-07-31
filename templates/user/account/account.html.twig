@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+{% block title %}My account
+{% endblock %}
+{% block body %}
+	<body onload="init()">
+		<div class="summary-identity" id="summary-cover">
+			<h3>Dashboard</h3>
+			{%  set image = "images/profiles/" ~ profile.picture %}
+			<img src="{{asset(image)}}" class="avatar"/>
+			<h4 class="panel-title">
+				{{profile.fullName}}</h4>
+			<br>
+		</div>
+		<div class="row account-row">
+			<div class="col-sm-3">
+				<br>
+				{%  include 'user/navside.html.twig' %}
+			</div>
+			<!--/col-sm-3-->
+			<div class="col-sm-9">
+				<br>
+				<br>
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#Messages" id="Messlink">Messages</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#History">History</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#Statistics">Statistics</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#Funds">Funds</a>
+					</li>
+				</ul>
+				<div id="myTabContent" class="tab-content tab-text">
+					<div class="tab-pane fade in active" id="Messages">
+						{%  include 'user/message/message.html.twig'%}
+					</div>
+					<div class="tab-pane fade" id="History">
+						<ul>
+							<li><a href="">Per product category</a></li>
+							<li><a href="">Per periods</a></li>
+							<li><a href="">Per Seller</a></li>
+							<li><a href="">Per price Interval</a></li>
+							<li><a href="">Other</a></li>
+						</ul>
+					</div>
+					<div class="tab-pane fade" id="Statistics">
+						<ul>
+							<li><a href="">Per Region</a></li>
+							<li><a href="">Per product</a></li>
+							<li><a href="">Per period</a></li>
+							<li><a href="">per price interval</a></li>
+							<li><a href="">Other</a></li>
+						</ul>
+					</div>
+					<div class="tab-pane fade" id="Funds">
+						<p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse 
+							                            gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche 
+							                            high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS 
+							                            viral locavore cosby sweater.</p>
+					</div>
+				</div>
+
+			</div>
+			<!-- /col-sm-9-->
+		</div>
+		<!--/row-->
+		<script type="text/javascript">
+			function init() {
+document.getElementById("Messlink").click();
+}
+function hideShow() {
+alert("Hello! I am an alert box!");
+var x = document.getElementById("mess_link").getAttribute("className");
+if (x == "panel-collapse collapse.show") {
+x = "panel-collapse collapse"
+} else {
+x = "panel-collapse collapse.show"
+}
+// document.getElementById("p2").setAttribute("aria-expanded", x);
+// document.getElementById("p2").innerHTML = "aria-expanded =" + x;
+}
+function bgChange() {
+window.alert("Hi there...");
+var cover = document.getElementById("color-picker");
+// preview = document.getElementById("image")  ;
+cover.addEventListener("change", function () {
+bgReset();
+});
+// cover.click();
+
+}
+function bgReset() {
+var bg = document.getElementById("color-picker"),
+cover = document.getElementById("summary-cover");
+window.alert("Reset Color");
+cover.setAttribute('background-image', url('../images/covers/cover1.jpeg'));
+}
+		</script>
+	</body>
+{% endblock %}

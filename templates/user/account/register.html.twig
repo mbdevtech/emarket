@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}E-market Account{% endblock %}
+
+{% block body %}
+		<div class="row ">
+				<div class="col-sm-4 col-sm-offset-4 justify center rounded-container">
+					<div class="signup-form"><!--sign up form-->
+						<h2>Register a new account</h2>
+							{{ form_start(form) }}
+                         	{{ form_row(form.username, {'label':'Username','attr':{'placeholder':'Enter your email...'}}) }}
+							{{ form_row(form.password, {'label':'Password  ','attr':{'placeholder':'enter a password...'}}) }}
+							{{ form_row(form.confirm,  {'label':'Confirm password   ','attr':{'placeholder':'confirm the password..'}}) }}
+	                        <hr>
+							<button type="submit" class="btn btn-default center">Signup</button>
+                            {{ form_end(form) }}
+					
+					</div><!--/sign up form-->
+				</div>
+              			
+			</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends '/admin/admin.html.twig' %}
+
+{% block title %}Discount index{% endblock %}
+
+{% block content %}
+<body>
+<br><br><br>
+{# tables #}
+<div class="container-fluid">
+          <div class="row">        
+            <div class="col-md-12">
+              <div class="card card-plain">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title mt-0"> Product Discount List</h4>
+                  <p class="card-category"> The list is given according to the times</p>
+                </div>
+                <div class = "text-center">
+                  <br><br>
+                  <div class="row md-form active-purple active-purple-2 mb-3">
+                    <div class="col-9">
+                      <input class="form-control" type="text" placeholder="Search by name" aria-label="Search"> 
+                    </div>
+                    <div class = "col-3">
+                      <h6>Add a new discount</h6>
+                       <a href="{{ path('catalog_discount_new') }}">
+                        <img src="{{asset('MaterialDash/add2.png')}}"/></a>
+                    </div>
+                   </div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead class="">          
+                        <th>Id</th>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Rate</th>
+                        <th>StartDate</th>
+                        <th>ExpiryDate</th>
+                        <th>actions</th>
+                      </thead>
+                      <tbody>
+                        {% for discount in discounts %}
+                            <tr>
+                                <td>{{ discount.id }}</td>
+                                <td>{{ discount.type }}</td>
+                                <td>{{ discount.name }}</td>
+                                <td>{{ discount.rate }}</td>
+                                <td>{{ discount.startDate ? discount.startDate|date('Y-m-d') : '' }}</td>
+                                <td>{{ discount.expiryDate ? discount.expiryDate|date('Y-m-d') : '' }}</td>
+                                <td>
+                                    <a href="{{ path('catalog_discount_edit', {'id': discount.id}) }}">
+                                                    <img src="{{asset('MaterialDash/edit.png')}}"/></a>
+                                    <a href="{{ path('catalog_discount_delete', {'id': discount.id}) }}">
+                                                    <img src="{{asset('MaterialDash/clear.png')}}"/></a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+{# end tables #}
+</body>
+{% endblock %}

@@ -1,0 +1,59 @@
+            <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#Inbox" id="Inboxlink">Inbox</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#Sent">Sent</a>
+                    </li>
+                        <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#Compose">Compose</a>
+                    </li>
+                        <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#Trash">Trash</a>
+                    </li>
+                </ul>
+                <br>
+                <div id="myTabContent" class="tab-content ">
+                        <div class="tab-pane fade in active" id="Inbox">           
+                            <ul>
+                              <li>Message1</li>
+                              <li>Message1</li>
+                              <li>Message1</li>
+                              <li>Message1</li>
+                            </ul> 
+                        </div>
+                        <div class="tab-pane fade" id="Sent">
+                            <ul>
+                              <li>Sent1</li>
+                              <li>Sent2</li>
+                              <li>Sent3</li>
+                              <li>Sent4</li>
+                            </ul>          
+                        </div>
+                        <div class="tab-pane fade" id="Compose">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputSubject">Subject</label>
+                                    <input type="text" class="form-control" id="inputSubject">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputMessage">Message</label>
+                                    <textarea class="form-control" id="inputMessage" rows="4"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="Trash">
+                            <ul>
+                              <li>Message trashed1</li>
+                              <li>Message trashed2</li>
+                              <li>Message trashed3</li>
+                              <li>Message trashed4</li>
+                            </ul>  
+                        </div>
+                </div>

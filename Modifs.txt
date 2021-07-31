@@ -1,0 +1,31 @@
+1- Preparer l'entite User pour l authentification
+   - Activation des contraintes de validation
+   - Ajout d une propriete non mappee {confirm} qui sert a confirmer le password
+   - Affecter le role ['ROLE_USER'] par default pour remedier aux cas des objets nulls
+   - Ajout de la relation OneToOne avec Profile et userid comme cle etrangere
+2 - Entite profile
+   - Rendre Email unique
+   - Cle etrangere userid
+3 - Creer des migrations et migrer
+4- Reglages necessaires
+   - Renommer les routes {register, login} pour {user_login, user_register}
+   - Configurer le fichier Security.yaml
+5 - AccountController
+  - Ajout de la routine {logout}
+  - creation de la classe formulaire RegisterType pour l'inscription
+  - Routine register
+6 - Sous templates/account  modification du fichier twig index.html.twig
+7 - La classe Authenticator du composant SECURITY de symfony exige de lui fournir un attribut Roles sous forme tableau.
+    Pour ceci on a ajoute {roles} de type json et garder {role} pour la relation ManyToMany.
+8 - Renommer les routes {Products,Products} dans shopping/productController 
+   pour {shopping_products, shopping_products}
+9- De meme pour {Cart, Checkout} a {shopping_Cart,shopping_Checkout} pour respecter
+   la structure des repertoires.
+10- sous src/Blog modifier les routes pour{blog_posts,blog_post,blog_section} 
+11- Dans shippingAdress class la propriete Adress --> Address comme dans 
+    BillingAddress
+12- Dans profileType Form lier les proprietes BillingAddress et shippingAdress
+   a leurs classes correspondantes.
+13 . Ajout de 2 repertoires {profiles, covers} sous /public/images pour stocker
+    les images des profiles et covers
+14- Definition de 2 parametes PROFILE_IMG_DIR et COVER_IMG_DIR dans services.yaml

@@ -1,0 +1,209 @@
+/* CSS for div elements and img tags */
+
+img {
+    max-width: 100%;
+    max-height: auto;
+    object-fit: contain;
+    }
+    
+.auto-resize-portrait {
+    height: 80px;
+    width: 50px;
+    }
+    
+.auto-resize-landscape {
+    height: 300px;
+    width: 800px;
+    }
+ /* pricing labels*/
+.b-price {
+    font-size: x-large ;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: italic;
+    color: rgb(247, 76, 142);
+    padding-left: 40px;
+    margin-bottom: 40px;
+  }
+  .deal-price {
+    font-size: large ;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-style: bold;
+    color:rgb(247, 76, 142);
+    padding-left: 50px;
+    margin-bottom: 10px;
+    justify-content: center;
+  }
+ /*---------------------------*/
+ /* Customize the label (the container) */
+ .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  table, th, td {
+    border: 0.5 px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 0px 12px;
+    text-align: left;
+  }
+  table#t01 {
+    width: 100%;    
+    background-color: #f1f1c1;
+  }
+  
+/*   avatar image */
+.image-center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 12%;
+} 
+.row.account-row{
+  padding-left:20px;
+}
+.avatar {
+    vertical-align: middle;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  
+}
+.avatar-sm {
+    vertical-align:top;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 10px 45px;
+}
+/* table and column container*/
+.profile-container{
+  margin-left: 30px;
+  margin-right: 10px;
+}
+.col-container {
+    display: table; /* Make the container element behave like a table */
+    width: 100%;
+}
+
+.col-sidebar {
+    display: table-cell; /* Make elements inside the container behave like table cells */
+    background-color: #efeff8;
+   
+}
+
+.col-content {
+    text-align: start;
+    display: table-cell;
+    background-color: white;
+}
+
+.side-container{
+    width: 100%;
+    float: left;
+}
+/* container arrondi*/
+.rounded-container {
+    border-radius: 6%;
+    border-color: orange;
+    border-style: solid;
+    padding: 45px;
+    margin-bottom: 35px;
+}
+/* rounded circle*/
+.rounded-img {
+   border-radius: 50%;
+   width: 10px;
+}
+/*  summary  */
+.summary-identity {
+    border-color: #efeff8;;
+    border-style: solid;
+    background-image: url('../images/wallpapers/index8.jpeg');
+    /*background-repeat: repeat;*/
+    background-size: cover;
+    padding-left: 25px;
+    color: lightyellow;
+}
+.summary-panel {
+    border-color: #efeff8;;
+    /*border-style: solid;*/
+    margin: 5px;
+}
+.summary-panel .panel-heading {
+    background-color: #e6e4defb;
+    border: 0 none;
+    color:orange;
+}
+.summary-body  {
+    padding: 10px;
+}
+
+/*   Category list search */
+#myCat {
+    background-image: url('/images/png/search-icon.png'); /* Add a search icon to input */
+    background-position: 8px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    background-size: 30px;
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 40px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+  }
+  
+  .myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+  }
+  
+  .myUL li a {
+    border: 1px solid #ddd; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: black; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+  }
+  
+  .myUL li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+  }
+/* color input style*/
+.color-input {
+  width : 100%;
+  border-style: none;
+  padding: 0px;
+}
+.picture-input {
+  width : 25%;
+  border-style: none;
+  padding: 0px;
+  margin-top: 15px;
+}
+/* tabs */
+.tab-text{
+   border-color: orange;
+   border-style: solid;
+   border-width: 0.5px;
+   padding: 15px;
+   margin-top: -2px;
+}
+/* text and headings */
+.centered{
+  text-align: center;
+}
+

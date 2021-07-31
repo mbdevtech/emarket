@@ -1,0 +1,18 @@
+{% extends '/admin/admin.html.twig' %}
+
+{% block title %}New Discount{% endblock %}
+
+{% block content %}
+<body>
+    <div class = "container">
+        <br><br><br>
+        <div class="card card-plain">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title mt-0"> Discount Creation</h4>
+                <p class="card-category"> First select the product you want to apply a discount</p>
+            </div>
+        </div>
+        {{ include('catalog/discount/_form.html.twig') }}
+    </div>
+</body>
+{% endblock %}

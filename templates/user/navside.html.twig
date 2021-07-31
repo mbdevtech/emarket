@@ -1,0 +1,78 @@
+<div class="left-sidebar" >
+     {#   <span>{{profile.fullName}}</span> #}
+    <div class="panel-group category-products" id="accordian"><!--dashboard-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordian" href="#orders" class="collapsed">
+                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                        <i class="fa fa-user" aria-hidden="true"></i><span> My Account</span>
+                    </a>
+                </h4>
+            </div>
+            <div id="orders" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <ul>
+                         <li><a href="{{path('user_account')}}">Summary</a></li>
+                        <li><a href="{{path('user_profile_edit')}}">Profile</a></li>
+                        <li><a href="">Funds</a></li>
+                        <li><a href="">Security</a></li>
+                        <li><a href="">other</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordian" href="#purchases" class="collapsed">
+                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                        <i class="fa fa-shopping-cart"></i> 
+                        Purchases </a>
+                </h4>
+            </div>
+            <div id="purchases" class="panel-collapse collapse" style="height: 0px;">
+                <div class="panel-body">
+                    <ul>
+                        <li><a href="">Per product category </a></li>
+                        <li><a href="">Per periods </a></li>
+                        <li><a href="">Per Seller </a></li>
+                        <li><a href="">Per price Interval</a></li>
+                        <li><a href="">Other </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordian" href="#sells" class="collapsed">
+                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                        <i class="fa fa-credit-card" aria-hidden="true"></i>  Selling
+                    </a>
+                </h4>
+            </div>
+            <div id="sells" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <ul>
+                        <li><a href="{{path('user_product')}}">Products</a></li>
+                        <li><a href="">Orders</a></li>
+                        <li><a href="">Other</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel panel-default">         
+            <div class="panel-heading">
+               <h4 class="panel-title"><a href="#"><i class="fa fa-euro"></i>  Funds</a></h4>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"><a href="#">other</a></h4>
+            </div>
+        </div>
+    </div><!--/dashboard-->			
+</div> 	<!--/left-sidebar -->
