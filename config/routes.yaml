@@ -1,3 +1,11 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+# cart_add:
+#   path: /cart/add/{id}
+#   controller: App\Controller\CartController::add
+
+# checkout2:
+#   path: /checkout2
+#   controller: App\Controller\CheckoutController::index

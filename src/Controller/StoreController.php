@@ -10,8 +10,29 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Catalog\Product;
 use App\Entity\Catalog\Review;
 
+
 class StoreController extends AbstractController
 {
+    /**
+     * @Route("/products2", name="shopping_products2")
+     */
+    public function index2()
+    {
+        return $this->render('shopping/product/index.html.twig', [
+            'controller_name' => 'ProductController',
+        ]);
+    }
+
+    /**
+     * @Route("/product2", name="shopping_product2")
+     */
+    public function produc2t()
+    {
+        return $this->render('shopping/product/product.html.twig', [
+            'controller_name' => 'ProductController',
+        ]);
+    }
+
     /**
      * @Route("/store", name="store")
      */

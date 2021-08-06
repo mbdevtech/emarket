@@ -59,4 +59,19 @@ class ReviewRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchOne();
     }
+    // extract all the reviews for the same product
+    public function findReviews($index)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT r.product_id, r.content, r.rate, r.edited_at, p.id, p.full_name 
+        FROM review r JOIN profile p WHERE (r.profile_id = p.id) 
+        and  (r.product_id = :product_id)';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['product_id' => $index]);
+        // close conn
+        $conn->close();
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAllAssociative();
+    }
 }
