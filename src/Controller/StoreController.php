@@ -73,6 +73,26 @@ class StoreController extends AbstractController
         ]);
     }
     /**
+     * @Route("/store/brand/{brand}", name="brand_products")
+     */
+    public function brand_products(string $brand, Request $request, PaginatorInterface $paginator)
+    {
+        $products = $this->getDoctrine()->getRepository(Product::class)->findByBrand($brand);
+        // paginator
+        $pagination = $paginator->paginate(
+            $products,
+            $request->query->getInt('page', 1)/*page number*/,
+            12/*limit per page*/
+        );
+
+        return $this->render('shopping/store/index.html.twig', [
+            'pagination' => $pagination,
+            'brand' => $brand,
+            'discounts' => $this->getDoctrine()->getRepository(Product::class)->findAllDiscounts(),
+            'category' => 0
+        ]);
+    }
+    /**
      * @Route("/store/{id}/products/{index}", name="product_detail")
      */
     public function product(?int $id, Request $request, int $index): Response

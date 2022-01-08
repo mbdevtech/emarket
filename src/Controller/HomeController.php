@@ -30,6 +30,7 @@ class HomeController extends AbstractController
         $sections = $this->getDoctrine()->getRepository(Category::class)->findMainCategories();
         $allsections = $this->getDoctrine()->getRepository(Category::class)->findAll();
 
+        //$brands = $this->getDoctrine()->getRepository(Product::class)->findByBrand();
         // paginator
         $pagination = $paginator->paginate(
             $products, /* query NOT result */
@@ -86,7 +87,7 @@ class HomeController extends AbstractController
     {
         $this->Mailer = $mailer;
         $email = (new Email())
-            ->from('mahfoudbousba2@gmail.com')
+            ->from('bmaconsulting@gmail.com')
             ->to('mahfoud_bousba@yahoo.com')
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')
@@ -107,7 +108,7 @@ class HomeController extends AbstractController
 
         $email = (new TemplatedEmail())
             ->from('mahfoud_bousba@yahoo.com')
-            ->to(new Address('khaledbousba3@gmai.com'))
+            ->to(new Address('khaledbousba3@gmail.com'))
             ->subject('Thanks for signing up!')
 
             // path of the Twig template to render

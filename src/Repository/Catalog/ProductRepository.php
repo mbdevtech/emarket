@@ -23,37 +23,6 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Product
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-    /**
-     * @return Product[]
-     */
 
     public function findWithPhotos(): array
     {
@@ -87,7 +56,7 @@ class ProductRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
         if ($category != 0) {
             $sql = '
-                SELECT p.id, p.category_id, p.name, p.excerpt, p.price, f.path 
+                SELECT p.id, p.category_id, p.name, p.excerpt, p.price, p.brand, f.path 
                 FROM product p JOIN photo f WHERE p.id = f.product_id
                 and (p.category_id = :category) ';
             $stmt = $conn->prepare($sql);
@@ -131,25 +100,33 @@ class ProductRepository extends ServiceEntityRepository
 
         $sql = '
             SELECT p.id, p.name, p.excerpt, p.price, d.start_date, d.expiry_date, d.rate, f.path 
-            FROM product p, photo f, discount d  WHERE  p.id = f.product_id AND p.id = d.product_id
+            FROM product p, photo f, discount d  WHERE  (p.id = f.product_id AND p.id = d.product_id)
             ';
         $stmt = $conn->prepare($sql);
-        //$stmt->execute(['min' => $min, 'max' => $max]);
         $stmt->execute();
-        // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAllAssociative();
     }
     // product by category
-    //  discount with photo
     public function findByCategory(int $category_id): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = 'SELECT * from product p  WHERE  (p.category_id = @category_id)';
-        //$sql = "SELECT * from product  where category_id = 108";
+        $sql = 'SELECT * from product p  WHERE  (p.category_id = :category_id)';
         $stmt = $conn->prepare($sql);
-        //$stmt->execute(['min' => $min, 'max' => $max]);
-        $stmt->execute();
+        $stmt->execute(['category_id' => $category_id]);
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAllAssociative();
+    }
+    // product by brand
+    public function findByBrand(string $brand): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'SELECT p.id, p.brand, p.name, p.excerpt, p.price, f.path 
+            FROM product p JOIN photo f WHERE p.id = f.product_id
+            and (p.brand = :brand) ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['brand' => $brand]);
         // returns an array of arrays (i.e. a raw data set)
         return $stmt->fetchAllAssociative();
     }

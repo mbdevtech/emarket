@@ -18,16 +18,17 @@ class CartController extends AbstractController
      */
     public function index(SessionInterface $session, ProductRepository $productRepository)
     {
+        // Get the products id list from the session
         $cart = $session->get('cart', []);
-        // Add products to the Cart
+        // Extract products infos to display them in the cart
         $productsCart = [];
         foreach ($cart as $id => $quantity) {
             $productsCart[] = [
                 'product' => $productRepository->findOneProductPhoto($id),
-                //'product' => $productRepository->find($id),
                 'quantity' => $quantity,
             ];
         }
+        // Render the Cart
         return $this->render('shopping/cart/index.html.twig', [
             'cart' => $cart,
             'productsCart' => $productsCart,
@@ -46,6 +47,20 @@ class CartController extends AbstractController
         } else {
             $cart[$id] = 1;
         }
+        $session->Set('cart', $cart);
+        //end test
+        return $this->redirectToRoute('shopping_cart');
+    }
+
+
+    /**
+     * @Route("/update/", name="cart_update")
+     */
+    public function update(SessionInterface $session)
+    {
+        $cart = $session->get('cart', []);
+        // find the products quantities to update
+        // to do
         $session->Set('cart', $cart);
         //end test
         return $this->redirectToRoute('shopping_cart');

@@ -1,159 +1,161 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CartController!
+{% block title %}Shopping Cart
 {% endblock %}
 
 {% block body %}
-	{% if cart|length == 0 %}
-		<h2>
-			No items added...</h2>
-	{% else %}
-		<section id="cart_items">
-			<div class="container">
-				<div class="breadcrumbs">
-					<ol class="breadcrumb">
-						<li>
-							<a href="{{path('home')}}">Home</a>
-						</li>
-						<li>
-							<a href="#">Wish List</a>
-						</li>
-					</ol>
-				</div>
+{% if cart|length == 0 %}
+	<h2>
+		No items added...</h2>
+{% else %}
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+					<li>
+						<a href="{{path('home')}}">Home</a>
+					</li>
+					<li>
+						<a href="#">Wish List</a>
+					</li>
+				</ol>
+			</div>
 
-				<div class="table-responsive cart_info">
-					<table class="table table-condensed">
-						<thead>
-							<tr class="cart_menu">
-								<td class="image">Item</td>
-								<td class="description"></td>
-								<td class="price">Price</td>
-								<td class="quantity">Quantity</td>
-								<td class="total">Total</td>
-								<td></td>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="price">Price</td>
+							<td class="quantity">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						{% set total = 0 %}
+						{% for p in productsCart %}
+							{# make a dynamic id for price #}
+							{% set priceid = ('price' ~ p.product[0].id)  %}
+							{# make a dynamic id for quantity #}
+							{% set qtid = ('qt' ~ p.product[0].id) %}
+							{# make a dynamic id for subtotal #}
+							{% set subid = ('sub' ~ p.product[0].id) %}
+							{# calculate total #}
+							{% set total = total + p.product[0].price %}
+							<tr>
+								<td class="cart_product">
+									<img src="{{p.product[0].path}}" style="width:30%;">
+								</td>
+								<td class="cart_description">
+									<h4>
+										<a href="">{{p.product[0].name}}</a>
+									</h4>
+									<p>Web ID:
+										{{p.product[0].id}}</p>
+								</td>
+								<td class="cart_price">
+									<p id='{{priceid}}'>${{p.product[0].price}}</p>
+								</td>
+								<td class="cart_quantity">
+									<div class="cart_quantity_button">
+										<a class="cart_quantity_up" type="button" onclick="add({{priceid | json_encode()}},{{qtid | json_encode()}},{{subid | json_encode()}})">
+											+
+										</a>
+										<input class="cart_quantity_input" type="text" id='{{qtid}}' value="{{p.quantity}}" autocomplete="off" size="2"></input>
+									<a class="cart_quantity_down" type="button" onclick="minus({{priceid | json_encode()}},{{qtid | json_encode()}},{{subid | json_encode()}})">
+										-
+									</a>
+								</td>
+								<td class="cart_total">
+									<p class="cart_total_price" id='{{subid}}'>${{p.product[0].price}}</p>
+								</td>
+								<td class="cart_delete">
+									<a href="{{path('cart_remove',{'id': p.product[0].id})}}" class="cart_quantity_delete" href="">
+										<i class="fa fa-times"></i>
+									</a>
+								</td>
 							</tr>
-						</thead>
-						<tbody>
-							{% set total = 0 %}
-							{% for p in productsCart %}
-								{# make a dynamic id for price #}
-								{% set priceid = ('price' ~ p.product[0].id)  %}
-								{# make a dynamic id for quantity #}
-								{% set qtid = ('qt' ~ p.product[0].id) %}
-								{# make a dynamic id for subtotal #}
-								{% set subid = ('sub' ~ p.product[0].id) %}
-								{# calculate total #}
-								{% set total = total + p.product[0].price %}
-								<tr>
-									<td class="cart_product">
-										<img src="{{p.product[0].path}}" style="width:30%;">
-									</td>
-									<td class="cart_description">
-										<h4>
-											<a href="">{{p.product[0].name}}</a>
-										</h4>
-										<p>Web ID:
-											{{p.product[0].id}}</p>
-									</td>
-									<td class="cart_price">
-										<p id='{{priceid}}'>${{p.product[0].price}}</p>
-									</td>
-									<td class="cart_quantity">
-										<div class="cart_quantity_button">
-											<a class="cart_quantity_up" type="button" onclick="add({{priceid | json_encode()}},{{qtid | json_encode()}},{{subid | json_encode()}})">
-												+
-											</a>
-											<input class="cart_quantity_input" type="text" id='{{qtid}}' value="{{p.quantity}}" autocomplete="off" size="2"></input>
-										<a class="cart_quantity_down" type="button" onclick="minus({{priceid | json_encode()}},{{qtid | json_encode()}},{{subid | json_encode()}})">
-											-
-										</a>
-									</td>
-									<td class="cart_total">
-										<p class="cart_total_price" id='{{subid}}'>${{p.product[0].price}}</p>
-									</td>
-									<td class="cart_delete">
-										<a href="{{path('cart_remove',{'id': p.product[0].id})}}" class="cart_quantity_delete" href="">
-											<i class="fa fa-times"></i>
-										</a>
-									</td>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
+						{% endfor %}
+					</tbody>
+				</table>
 			</div>
-		</section><!--/#cart_items--><section id="do_action">
-			<div class="container">
-				<div class="heading">
-					<h3>What would you like to do next?</h3>
-					<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="chose_area">
-							<ul class="user_option">
-								<li><input type="checkbox"><label>Use Coupon Code</label>
-								</li>
-								<li><input type="checkbox"><label>Use Gift Voucher</label>
-								</li>
-								<li><input type="checkbox"><label>Estimate Shipping & Taxes</label>
-								</li>
-							</ul>
-							<ul class="user_info">
-								<li class="single_field">
-									<label>Country:</label>
-									<select>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
-									</select>
-								</li>
-								<li class="single_field">
-									<label>Region / State:</label>
-									<select>
-										<option>Select</option>
-										<option>Dhaka</option>
-										<option>London</option>
-										<option>Dillih</option>
-										<option>Lahore</option>
-										<option>Alaska</option>
-										<option>Toronto</option>
-										<option>Dubai</option>
-									</select>
-								</li>
-								<li class="single_field zip-field">
-									<label>Zip Code:</label><input type="text"></li>
-							</ul>
-							<a class="btn btn-default update" href="">Get Quotes</a>
-							<a class="btn btn-default check_out" href="">Continue</a>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div class="total_area">
-							<ul>
-								<li>Cart Sub Total<span id="subtotal">S{{total}}</span>
-								</li>
-								<li id="ecotax">Eco Tax<span>5%</span>
-								</li>
-								<li id="shipping">Shipping Cost<span>Free</span>
-								</li>
-								<li>Total<span id="total">${{total*1.05}}</span>
-								</li>
-								<a class="btn btn-default check_out" href="#">Check Out</a>
-							</ul>
+		</div>
+	</section>
+	<!--/#cart_items-->
+	<section id="do_action">
+		<div class="container">
+			<div class="heading">
+				<h3>What would you like to do next?</h3>
+				<p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="chose_area">
+						<ul class="user_option">
+							<li><input type="checkbox" id="code-check" onchange="coupon()">
+								<label>Use Coupon Code</label>
+								<span></span><input id="code-value" type="text" hidden>
+							</li>
 
-						</div>
-					</div>
-				</div>
+						</li>
+					</input>
+				</li>
+				<li><input type="checkbox" id="estimate" onchange="shipping()"><label>Estimate Shipping & Taxes</label>
+				</li>
+			</ul>
+			<div id="shipping" hidden>
+				<ul class="user_info">
+					<li class="single_field">
+						<label>Country:</label>
+						<select>
+							<option>Canada</option>
+							<option>United States</option>
+							<option>Bangladesh</option>
+							<option>UK</option>
+							<option>India</option>
+							<option>Pakistan</option>
+						</select>
+					</li>
+					<li class="single_field">
+						<label>Region / State:</label>
+						<select>
+							<option>Select</option>
+							<option>Dhaka</option>
+							<option>London</option>
+							<option>Dilhi</option>
+							<option>Lahore</option>
+							<option>Alaska</option>
+							<option>Toronto</option>
+							<option>Montreal</option>
+						</select>
+					</li>
+					<li class="single_field zip-field">
+						<label>Zip Code:</label><input type="text"></li>
+				</ul>
+				<a class="btn btn-default update" href="">Get Quotes</a>
 			</div>
-		</section><!--/#do_action-->{% endif %}
-	<script type="text/javascript">
-		function change_total(x, y, z) {
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="total_area">
+			<ul>
+				<li>Cart Sub Total<span id="subtotal">S{{total}}</span>
+				</li>
+				<li id="ecotax">Eco Tax<span>5%</span>
+				</li>
+				<li id="shipping">Shipping Cost<span>Free</span>
+				</li>
+				<li>Total<span id="total">${{total*1.05}}</span>
+				</li>
+				<a class="btn btn-default check_out" href="{{path('home')}}">Continue Shopping</a>
+				<a class="btn btn-default check_out" href="#">Check Out</a>
+			</ul>
+
+		</div>
+	</div>
+</div></div></section><!--/#do_action-->{% endif %}<script type="text/javascript">function change_total(x, y, z) {
 const old_row_sub_total = Number(z.textContent.substring(1));
 const old_sub_total = Number(subtotal.textContent.substring(1));
 z.textContent = Number(x.textContent.substring(1)) * y.value;
@@ -166,6 +168,28 @@ total.textContent = '$' + (
 );
 // add 5%
 }
+// add coupon code
+function coupon() {
+var x = document.getElementById("code-check");
+var y = document.getElementById("code-value");
+if (x.checked) {
+y.style.display = "inline";
+} else {
+y.style.display = "none";
+}
+}
+// end coupon
+// add shipping estimation
+function shipping() {
+var x = document.getElementById("estimate");
+var y = document.getElementById("shipping");
+if (x.checked) {
+y.style.display = "inline";
+} else {
+y.style.display = "none";
+}
+}
+// end estimation
 function minus(price, qt, subtotal) {
 const x = document.getElementById(price);
 const y = document.getElementById(qt);
@@ -181,6 +205,4 @@ const y = document.getElementById(qt);
 const z = document.getElementById(subtotal);
 y.value ++;
 change_total(x, y, z);
-}
-	</script>
-{% endblock %}
+}</script>{% endblock %}
